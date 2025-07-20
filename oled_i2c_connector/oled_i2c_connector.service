@@ -1,0 +1,19 @@
+[Unit]
+Description=OLED I2C Display Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /root/ntp-gps-server/oled_i2c_connector/service.py
+WorkingDirectory=/root/ntp-gps-server/oled_i2c_connector
+Restart=always
+RestartSec=5
+User=root
+Group=root
+Environment=SERVER_ADDRESS=0.0.0.0
+Environment=SERVER_PORT=5050
+Environment=DISPLAY_PORT=1
+Environment=DISPLAY_ADDRESS=0x3C
+
+[Install]
+WantedBy=multi-user.target
