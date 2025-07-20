@@ -1,0 +1,26 @@
+[Unit]
+Description=Network Control Service
+Documentation=https://github.com/your-repo/ntp-gps-server
+
+After=network.target
+Wants=network.target
+After=NetworkManager.service
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/python3 /root/ntp-gps-server/network-service/service.py
+WorkingDirectory=/root/ntp-gps-server/network-service
+
+Restart=always
+RestartSec=5
+
+User=root
+Group=root
+
+Environment=SERVER_HOST=0.0.0.0
+Environment=SERVER_PORT=7575
+Environment=CONNECTION_NAME=Wired connection 1
+
+[Install]
+WantedBy=multi-user.target

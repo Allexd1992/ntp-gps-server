@@ -1,0 +1,10 @@
+export enum Constants {
+    GET_NETWORK = 'GET_NETWORK',
+    SET_NETWORK = 'SET_NETWORK',
+    SET_ADDRES ='SET_ADDRES',
+    SET_DNS ='SET_DNS',
+    SET_GATEWAY ='SET_GATEWAY',
+
+ 
+
+}

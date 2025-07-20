@@ -1,0 +1,2 @@
+window.REACT_APP_SERVER_HOST='localhost';
+window.REACT_APP_SERVER_PORT=8080;

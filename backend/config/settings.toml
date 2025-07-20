@@ -1,0 +1,14 @@
+[ntp]
+server_list = ["0.ru.pool.ntp.org:123"]
+enable = true
+cycle = 8000
+
+[gps]
+enable = true
+
+[display]
+enable = true
+
+[rtc]
+enable = true
+cycle = 1000

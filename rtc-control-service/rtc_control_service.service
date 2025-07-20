@@ -1,0 +1,25 @@
+[Unit]
+Description=RTC Control Service
+Documentation=https://github.com/your-repo/ntp-gps-server
+
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/python3 /root/ntp-gps-server/rtc-control-service/service.py
+WorkingDirectory=/root/ntp-gps-server/rtc-control-service
+
+Restart=always
+RestartSec=5
+
+User=root
+Group=root
+
+Environment=SERVER_ADDRESS=0.0.0.0
+Environment=SERVER_PORT=6060
+Environment=DEVICE_PATH=/dev/rtc1
+
+[Install]
+WantedBy=multi-user.target

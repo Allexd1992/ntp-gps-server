@@ -1,0 +1,55 @@
+# /etc/systemd/system/ntp-server.service
+# NTP GPS Server Backend Service
+# This service provides NTP server, GPS processing, and REST API functionality
+
+[Unit]
+# Service description and identification
+Description=NTP GPS Server Backend
+# Documentation link (replace with actual repository URL)
+Documentation=https://github.com/your-repo/ntp-gps-server
+
+# Dependencies and ordering
+After=network.target              # Start after network is available
+Wants=network.target              # Require network to be available
+Conflicts=shutdown.target         # Don't start during shutdown
+
+[Service]
+# Service type configuration
+Type=simple                       # Simple service that runs until completion
+
+# Execution configuration
+ExecStart=/opt/ntp-gps-server/backend/backend
+WorkingDirectory=/opt/ntp-gps-server/backend
+
+# Restart policy
+Restart=always                    # Always restart if service exits
+RestartSec=10                     # Wait 10 seconds before restarting
+
+# User and group for service execution
+User=root                         # Run as root (required for NTP port 123)
+Group=root                        # Root group
+
+# Environment variables for service configuration
+Environment=RUST_LOG=info         # Logging level
+Environment=CONFIG_PATH=/opt/ntp-gps-server/backend/config/settings.toml
+Environment=WEB_SERVER_PORT=8080  # Web API port
+Environment=NTP_SERVER_PORT=123   # NTP server port
+
+# Security settings (recommended for production)
+# NoNewPrivileges=true           # Prevent gaining new privileges
+# PrivateTmp=true                # Use private /tmp directory
+# ProtectSystem=strict           # Protect system directories
+# ReadWritePaths=/opt/ntp-gps-server/backend/config  # Allow config access
+
+# Resource limits (optional)
+# LimitNOFILE=4096              # Maximum open files
+# MemoryMax=200M                # Maximum memory usage
+# CPUQuota=20%                  # CPU usage limit
+
+# Timeout settings (optional)
+# TimeoutStartSec=30            # Service start timeout
+# TimeoutStopSec=30             # Service stop timeout
+
+[Install]
+# Installation target
+WantedBy=multi-user.target      # Start service in multi-user mode

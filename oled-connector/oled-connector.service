@@ -1,0 +1,26 @@
+[Unit]
+Description=OLED Display Service
+Documentation=https://github.com/your-repo/ntp-gps-server
+
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/python3 /root/ntp-gps-server/oled-connector/service.py
+WorkingDirectory=/root/ntp-gps-server/oled-connector
+
+Restart=always
+RestartSec=5
+
+User=root
+Group=root
+
+Environment=SERVER_ADDRESS=0.0.0.0
+Environment=SERVER_PORT=5050
+Environment=DISPLAY_PORT=1
+Environment=DISPLAY_ADDRESS=0x3C
+
+[Install]
+WantedBy=multi-user.target 
